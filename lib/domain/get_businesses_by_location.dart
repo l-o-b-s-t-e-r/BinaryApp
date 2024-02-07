@@ -8,6 +8,6 @@ class GetBusinessByLocation {
   final BusinessRepositoryInterface repository;
 
   Future<Result<BusinessesModel>> call(int page) {
-    return repository.fetchBusinesses();
+    return repository.loadBusinesses();
   }
 }
