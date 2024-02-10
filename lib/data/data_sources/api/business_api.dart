@@ -1,14 +1,18 @@
-import 'package:binary_app/data/data_sources/api/business_api_interface.dart';
 import 'package:binary_app/data/dto/businesses_body_dto.dart';
-import 'package:binary_app/data/http/http_client_interface.dart';
+import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
 
-class BusinessApi implements BusinessApiInterface {
-  BusinessApi({required this.client});
+part 'business_api.g.dart';
 
-  final HttpClientInterface client;
+@RestApi()
+abstract class BusinessApi {
+  factory BusinessApi(Dio dio, {String baseUrl}) = _BusinessApi;
 
-  @override
-  Future<BusinessesBodyDto> getBusinesses() {
-    return client.get<BusinessesBodyDto>();
-  }
+  @GET('/v1/businesses')
+  Future<BusinessesBodyDto> getBusinesses(
+    @Query('limit') int limit,
+    @Query('offset') int offset,
+    @Query('includes') String includes,
+    @Query('filters') String filters,
+  );
 }

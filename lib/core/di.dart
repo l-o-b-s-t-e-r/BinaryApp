@@ -1,12 +1,10 @@
 import 'package:binary_app/core/enviroment.dart';
 import 'package:binary_app/data/business_repository.dart';
 import 'package:binary_app/data/data_sources/api/business_api.dart';
-import 'package:binary_app/data/data_sources/api/business_api_interface.dart';
-import 'package:binary_app/data/http/http_client.dart';
-import 'package:binary_app/data/http/http_client_interface.dart';
+import 'package:binary_app/data/http/dio_builder.dart';
+import 'package:binary_app/data/http/dio_factory_interface.dart';
 import 'package:binary_app/domain/repositories/business_repository_interface.dart';
 import 'package:binary_app/domain/use_cases/get_businesses_by_location_use_case.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -17,11 +15,8 @@ class BaseProvider extends MultiProvider {
   }) : super(
           key: key,
           providers: [
-            Provider<HttpClientInterface>.value(
-                value: HttpClient(
-              dio: Dio(),
-              environment: Environment(),
-            )),
+            Provider<DioFactoryInterface>.value(value: DioFactory()),
+            Provider<Environment>.value(value: Environment()),
           ],
           child: DataSourcesProvider(child: child),
         );
@@ -36,7 +31,8 @@ class DataSourcesProvider extends MultiProvider {
           providers: [
             Provider<BusinessApi>(
               create: (context) => BusinessApi(
-                client: context.read<HttpClientInterface>(),
+                context.read<DioFactory>().create(),
+                baseUrl: context.read<Environment>().baseUrl,
               ),
             ),
           ],
@@ -53,7 +49,7 @@ class RepositoriesProvider extends MultiProvider {
           providers: [
             Provider<BusinessRepositoryInterface>(
               create: (context) => BusinessRepository(
-                api: context.read<BusinessApiInterface>(),
+                api: context.read<BusinessApi>(),
               ),
             ),
           ],

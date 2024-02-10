@@ -1,4 +1,4 @@
-import 'package:binary_app/data/data_sources/api/business_api_interface.dart';
+import 'package:binary_app/data/data_sources/api/business_api.dart';
 import 'package:binary_app/domain/models/businesses_model.dart';
 import 'package:binary_app/domain/models/error_model.dart';
 import 'package:binary_app/domain/models/result.dart';
@@ -7,14 +7,20 @@ import 'package:binary_app/domain/repositories/business_repository_interface.dar
 class BusinessRepository implements BusinessRepositoryInterface {
   BusinessRepository({required this.api});
 
-  final BusinessApiInterface api;
+  final BusinessApi api;
 
   @override
-  Future<Result<BusinessesModel>> loadBusinesses() {
+  Future<Result<BusinessesModel>> loadBusinesses({
+    required int limit,
+    required int offset,
+    required String includes,
+    required String filters,
+  }) async {
     try {
-      api.getBusinesses();
-      return Future.value(ResultError(Unknown()));
-    } catch (e, stackTrace) {
+      final result = await api.getBusinesses(limit, offset, includes, filters);
+      final model = result.toModel();
+      return Future.value(ResultSuccess(model));
+    } catch (e) {
       return Future.value(ResultError(Unknown()));
     }
   }
