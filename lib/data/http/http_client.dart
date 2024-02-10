@@ -1,5 +1,5 @@
-import 'package:binary_app/data/core/http_client_interface.dart';
-import 'package:binary_app/data/core/http_exception.dart';
+import 'package:binary_app/data/http/http_client_interface.dart';
+import 'package:binary_app/data/http/http_exception.dart';
 import 'package:dio/dio.dart';
 
 class HttpClient implements HttpClientInterface {
