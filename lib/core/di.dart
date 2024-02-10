@@ -4,7 +4,7 @@ import 'package:binary_app/data/data_sources/api/business_api.dart';
 import 'package:binary_app/data/http/dio_builder.dart';
 import 'package:binary_app/data/http/dio_factory_interface.dart';
 import 'package:binary_app/domain/repositories/business_repository_interface.dart';
-import 'package:binary_app/domain/use_cases/get_businesses_by_location_use_case.dart';
+import 'package:binary_app/domain/use_cases/get_businesses_use_case.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -64,8 +64,8 @@ class UseCasesProvider extends MultiProvider {
   }) : super(
           key: key,
           providers: [
-            Provider<GetBusinessByLocationUseCase>(
-              create: (context) => GetBusinessByLocationUseCase(
+            Provider<GetBusinessUseCase>(
+              create: (context) => GetBusinessUseCase(
                 repository: context.read<BusinessRepositoryInterface>(),
               ),
             ),

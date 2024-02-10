@@ -7,10 +7,10 @@ class BusinessesModel {
     this.limit,
     this.offset,
     this.included,
-    this.data,
+    this.models,
   });
 
   int? total, limit, offset;
   List<IncludedModel>? included;
-  List<DataModel>? data;
+  List<DataModel>? models;
 }
