@@ -1,6 +1,6 @@
 import 'package:binary_app/data/dto/data_attributes_dto.dart';
 import 'package:binary_app/domain/models/data_model.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'data_dto.g.dart';
 

@@ -1,4 +1,4 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'meta_dto.g.dart';
 
@@ -13,15 +13,3 @@ class MetaDto {
 
   Map<String, dynamic> toJson() => _$MetaDtoToJson(this);
 }
-
-/*@freezed
-class MetaDto with _$MetaDto {
-  const factory MetaDto({
-    required int total,
-    required int limit,
-    required int offset,
-  }) = _MetaDto;
-
-  factory MetaDto.fromJson(Map<String, dynamic> json) =>
-      _$MetaDtoFromJson(json);
-}*/

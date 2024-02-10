@@ -2,7 +2,7 @@ import 'package:binary_app/data/dto/data_dto.dart';
 import 'package:binary_app/data/dto/included_dto.dart';
 import 'package:binary_app/data/dto/meta_dto.dart';
 import 'package:binary_app/domain/models/businesses_model.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'businesses_body_dto.g.dart';
 
@@ -24,6 +24,6 @@ class BusinessesBodyDto {
         limit: meta?.limit,
         offset: meta?.offset,
         included: included?.map((e) => e.toModel()).toList(),
-        data: data?.map((e) => e.toModel()).toList(),
+        models: data?.map((e) => e.toModel()).toList(),
       );
 }
