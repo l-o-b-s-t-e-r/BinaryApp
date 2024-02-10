@@ -1,3 +1,4 @@
+import 'package:binary_app/core/enviroment.dart';
 import 'package:binary_app/data/business_repository.dart';
 import 'package:binary_app/data/data_sources/api/business_api.dart';
 import 'package:binary_app/data/data_sources/api/business_api_interface.dart';
@@ -16,7 +17,11 @@ class BaseProvider extends MultiProvider {
   }) : super(
           key: key,
           providers: [
-            Provider<HttpClientInterface>.value(value: HttpClient(Dio())),
+            Provider<HttpClientInterface>.value(
+                value: HttpClient(
+              dio: Dio(),
+              environment: Environment(),
+            )),
           ],
           child: DataSourcesProvider(child: child),
         );
