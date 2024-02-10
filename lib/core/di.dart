@@ -31,7 +31,7 @@ class DataSourcesProvider extends MultiProvider {
           providers: [
             Provider<BusinessApi>(
               create: (context) => BusinessApi(
-                context.read<DioFactory>().create(),
+                context.read<DioFactoryInterface>().create(),
                 baseUrl: context.read<Environment>().baseUrl,
               ),
             ),
