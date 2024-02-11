@@ -1,6 +1,6 @@
-import 'package:binary_app/generated/l10n.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension ContextExt on BuildContext {
-  S get strings => S.of(this);
+  AppLocalizations get strings => AppLocalizations.of(this)!;
 }
