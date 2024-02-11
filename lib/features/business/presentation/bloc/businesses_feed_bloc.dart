@@ -65,7 +65,9 @@ class BusinessesFeedBloc extends Bloc<BusinessesEvent, BusinessesFeedState> {
         case ResultError():
           _handleErrorResult(result, emit);
       }
-    } catch (_) {}
+    } catch (_) {
+      emit(state.copyWith(status: BusinessesFeedStatus.error));
+    }
   }
 
   void _handleSuccessResult(
