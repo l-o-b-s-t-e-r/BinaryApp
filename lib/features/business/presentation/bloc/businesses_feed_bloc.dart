@@ -54,7 +54,6 @@ class BusinessesFeedBloc extends Bloc<BusinessesEvent, BusinessesFeedState> {
 
     emit(state.copyWith(status: BusinessesFeedStatus.loading));
     try {
-      print('fetch new businesses ${state.allBusinesses.length}');
       final result = await getBusinessByLocation(
         limit: _pageSize,
         offset: state.allBusinesses.length,
@@ -82,9 +81,6 @@ class BusinessesFeedBloc extends Bloc<BusinessesEvent, BusinessesFeedState> {
     } else {
       final isAlreadyLoaded =
           result.offset == null || result.offset! < state.allBusinesses.length;
-      if (isAlreadyLoaded) {
-        print('data already loaded');
-      }
       if (isAlreadyLoaded) return;
 
       final currentFilters = state.filtersAsMap();
@@ -106,7 +102,6 @@ class BusinessesFeedBloc extends Bloc<BusinessesEvent, BusinessesFeedState> {
 
       if (state.selectedFilter != null &&
           filteredBusinesses.length < _pageSize) {
-        print('result is empty => load more ${state.allBusinesses.length}');
         add(LoadBusinessesEvent());
       }
     }
