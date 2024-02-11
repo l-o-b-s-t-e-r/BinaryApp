@@ -1,6 +1,7 @@
 import 'package:binary_app/features/business/presentation/bloc/businesses_event.dart';
 import 'package:binary_app/features/business/presentation/bloc/businesses_feed_bloc.dart';
 import 'package:binary_app/features/business/presentation/bloc/businesses_feed_state.dart';
+import 'package:binary_app/utils/extension_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +27,7 @@ class BottomLoader extends StatelessWidget {
           onPressed: () {
             context.read<BusinessesFeedBloc>().add(LoadBusinessesEvent());
           },
-          child: const Text('LOAD MORE'),
+          child: Text(context.strings.loadMore.toUpperCase()),
         ),
       BusinessesFeedStatus.success => const SizedBox(),
     };

@@ -8,6 +8,7 @@ import 'package:binary_app/features/business/presentation/widgets/empty_feed.dar
 import 'package:binary_app/features/business/presentation/widgets/error_feed.dart';
 import 'package:binary_app/features/business/presentation/widgets/feed_action_menu.dart';
 import 'package:binary_app/features/business/presentation/widgets/filter.dart';
+import 'package:binary_app/utils/extension_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,14 +26,14 @@ class BusinessesFeedScreen extends StatelessWidget {
         listener: (context, state) {
           if (state.status.isError && state.allBusinesses.isNotEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Oops, failed to load businesses')),
+              SnackBar(content: Text(context.strings.failedLoadBusinesses)),
             );
           }
         },
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Businesses'),
+              title: Text(context.strings.businesses),
               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
               actions:
                   state.filters.isNotEmpty ? [const FeedActionMenu()] : null,
