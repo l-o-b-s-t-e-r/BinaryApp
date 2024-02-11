@@ -53,7 +53,6 @@ class BusinessesFeedBloc extends Bloc<BusinessesEvent, BusinessesFeedState> {
     if (state.canLoadMore.not) return;
 
     emit(state.copyWith(status: BusinessesFeedStatus.loading));
-    await Future.delayed(const Duration(seconds: 2)); //TODO remove
     try {
       print('fetch new businesses ${state.allBusinesses.length}');
       final result = await getBusinessByLocation(
