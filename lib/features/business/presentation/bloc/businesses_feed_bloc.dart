@@ -53,20 +53,16 @@ class BusinessesFeedBloc extends Bloc<BusinessesEvent, BusinessesFeedState> {
     if (state.canLoadMore.not) return;
 
     emit(state.copyWith(status: BusinessesFeedStatus.loading));
-    try {
-      final result = await getBusinessByLocation(
-        limit: _pageSize,
-        offset: state.allBusinesses.length,
-      );
+    final result = await getBusinessByLocation(
+      limit: _pageSize,
+      offset: state.allBusinesses.length,
+    );
 
-      switch (result) {
-        case ResultSuccess():
-          _handleSuccessResult(result.data, emit);
-        case ResultError():
-          _handleErrorResult(result, emit);
-      }
-    } catch (_) {
-      emit(state.copyWith(status: BusinessesFeedStatus.error));
+    switch (result) {
+      case ResultSuccess():
+        _handleSuccessResult(result.data, emit);
+      case ResultError():
+        _handleErrorResult(result, emit);
     }
   }
 
